@@ -8,13 +8,15 @@ const router = express.Router();
 router.get('/user', (request, response, next) => {
     if (request.user) {
         return response.status(200).json({
-            user: request.user,
-            authenticated: true
+            user: {
+                id: request.user.id,
+                username: request.user.username
+            }
         });
     } else {
-        return response.status(401).json({
-            error: 'User is not authenticated',
-            authenticated: false
+        return next({
+            status: 401,
+            message: 'User is not authenticated.'
         });
     }
 });
@@ -35,8 +37,7 @@ function login(request, response, next) {
                 return next(error);
             }
             return response.status(200).send({
-                user: { id: user.id, username: user.username },
-                message: 'Succesfully logged in'
+                user: { id: user.id, username: user.username }
             });
         });
     })(request, response, next);
