@@ -5,6 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 const app = require('express')();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
@@ -21,13 +22,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-var User = require('./models/user');
+const {User} = require('./models')
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const PORT = process.env.PORT || 3001;
 const IP = process.env.IP || '127.0.0.1';
+
+const authRoutes = require('./routes/auth'); 
+app.use('/auth',authRoutes);
 
 app.use((request, response, next) => {
     let error = new Error('Not Found');
