@@ -22,7 +22,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const {User} = require('./models')
+const { User } = require('./models');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -30,8 +30,8 @@ passport.deserializeUser(User.deserializeUser());
 const PORT = process.env.PORT || 3001;
 const IP = process.env.IP || '127.0.0.1';
 
-const authRoutes = require('./routes/auth'); 
-app.use('/auth',authRoutes);
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
 
 app.use((request, response, next) => {
     let error = new Error('Not Found');
