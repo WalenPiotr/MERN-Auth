@@ -8,9 +8,26 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 
-const PORT = process.env.PORT || 1999;
-const IP = process.env.IP || '127.0.0.1';
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+app.use(
+    require('express-session')({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
+);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+var User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+const PORT = process.env.PORT || 3001;
+const IP = process.env.IP || '127.0.0.1';
 
 app.use((request, response, next) => {
     let error = new Error('Not Found');
