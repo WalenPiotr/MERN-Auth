@@ -41,7 +41,6 @@ app.use((request, response, next) => {
 
 app.use((error, request, response, next) => {
     response.status(error.status || 500).json({
-        message: error.message || 'Something went wrong',
         error: error
     });
 });

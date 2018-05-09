@@ -19,41 +19,7 @@ router.get('/user', (request, response, next) => {
     }
 });
 
-router.post('/register', (request, response, next) => {
-    console.log('/register handler', request.body);
-    User.register(
-        new User({ username: request.body.username }),
-        request.body.password,
-        (error, account) => {
-            if (error) {
-                return response.status(500).send({ error: error.message });
-            }
-
-            passport.authenticate('local', function(error, user, info) {
-                if (error) {
-                    return next(error);
-                }
-                if (!user) {
-                    return next({
-                        status: 400,
-                        message: 'Invalid message or password.'
-                    });
-                }
-                request.logIn(user, function(error) {
-                    if (error) {
-                        return next(error);
-                    }
-                    return response.status(200).send({
-                        username: user.username,
-                        message: 'Succesfully registered and logged in'
-                    });
-                });
-            })(request, response, next);
-        }
-    );
-});
-
-router.post('/login', (request, response, next) => {
+function login(request, response, next) {
     passport.authenticate('local', function(error, user, info) {
         if (error) {
             return next(error);
@@ -61,7 +27,7 @@ router.post('/login', (request, response, next) => {
         if (!user) {
             return next({
                 status: 400,
-                message: 'Invalid message or password.'
+                message: 'Invalid username or password.'
             });
         }
         request.logIn(user, function(error) {
@@ -69,11 +35,28 @@ router.post('/login', (request, response, next) => {
                 return next(error);
             }
             return response.status(200).send({
-                username: user.username,
+                user: { id: user.id, username: user.username },
                 message: 'Succesfully logged in'
             });
         });
     })(request, response, next);
+}
+
+function register(request, response, next) {
+    User.register(
+        new User({ username: request.body.username }),
+        request.body.password
+    )
+        .then(() => login(request, response, next))
+        .catch(error => response.status(500).send({ error: error.message }));
+}
+
+router.post('/register', (request, response, next) => {
+    register(request, response, next);
+});
+
+router.post('/login', (request, response, next) => {
+    login(request, response, next);
 });
 
 router.get('/logout', (request, response, next) => {
