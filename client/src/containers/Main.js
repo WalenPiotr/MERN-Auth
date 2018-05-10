@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Route, Redirect, Switch, withRouter } from 'react-router';
 
-import { login, logout, register } from '../actionCreators';
+import { login, logout, register } from '../action/auth';
 import { connect } from 'react-redux';
 
 class Main extends Component {

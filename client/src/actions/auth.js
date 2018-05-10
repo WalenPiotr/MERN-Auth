@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, REGISTER_USER } from './actionTypes';
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER } from '../actionTypes';
 
 function loginAction(data) {
     console.log(data);

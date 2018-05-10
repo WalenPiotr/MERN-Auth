@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-const Errorbar = props => {
-    return <div> {this.props.error} </div>;
+const Errorbar = ({ error }) => {
+    return <div> {error} </div>;
 };
 
 Errorbar.propTypes = {};
