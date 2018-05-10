@@ -5,23 +5,15 @@ const initialState = {
     user: {}
 };
 
-export default function rootReducer(state = initialState, action) {
+export default (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_USER:
-            if (action.data.user) {
-                return { authenticated: true, user: action.data.user };
-            } else {
-                return { ...state };
-            }
+            return { authenticated: true, user: action.user };
         case LOGOUT_USER:
             return { authenticated: false, user: {} };
         case REGISTER_USER:
-            if (action.data.user) {
-                return { authenticated: true, user: action.data.user };
-            } else {
-                return { ...state };
-            }
+            return { authenticated: true, user: action.user };
         default:
             return state;
     }
-}
+};

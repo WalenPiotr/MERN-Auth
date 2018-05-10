@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
     render() {
-        console.log(this.props.authenticated);
         const component = this.props.authenticated ? (
             <div>
                 <p>
@@ -29,9 +28,9 @@ class Navbar extends Component {
 
 Navbar.propTypes = {};
 
-function mapStateToProps(reduxState) {
+function mapStateToProps(state) {
     return {
-        authenticated: reduxState.authenticated
+        authenticated: state.auth.authenticated
     };
 }
 export default connect(mapStateToProps)(Navbar);

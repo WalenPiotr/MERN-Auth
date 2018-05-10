@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Route, Redirect, Switch, withRouter } from 'react-router';
 
-import { login, logout, register } from '../action/auth';
+import { login, logout, register } from '../actions/auth';
+import { clearStatus } from '../actions/status';
 import { connect } from 'react-redux';
 
 class Main extends Component {
@@ -22,6 +23,10 @@ class Main extends Component {
         this.props.history.push('/');
     };
 
+    callClearStatus = () => {
+        this.props.clearStatus();
+    };
+
     render() {
         return (
             <div>
@@ -37,6 +42,7 @@ class Main extends Component {
                             <LoginForm
                                 {...props}
                                 handleLogin={this.handleLogin}
+                                clearStatus={this.callClearStatus}
                             />
                         )}
                     />
@@ -46,6 +52,7 @@ class Main extends Component {
                             <Logout
                                 {...props}
                                 handleLogout={this.handleLogout}
+                                clearStatus={this.callClearStatus}
                             />
                         )}
                     />
@@ -55,6 +62,7 @@ class Main extends Component {
                             <RegisterForm
                                 {...props}
                                 handleRegister={this.handleRegister}
+                                clearStatus={this.callClearStatus}
                             />
                         )}
                     />
@@ -67,26 +75,32 @@ class Main extends Component {
 
 Main.propTypes = {};
 
-function mapStateToProps(reduxState) {
+function mapStateToProps(state) {
     return {
-        authenticated: reduxState.authenticated
+        authenticated: state.auth.authenticated
     };
 }
 export default withRouter(
-    connect(mapStateToProps, { login, logout, register })(Main)
+    connect(mapStateToProps, { login, logout, register, clearStatus })(Main)
 );
 
 class Logout extends Component {
     constructor(props) {
         super(props);
+        this.props.clearStatus();
         this.props.handleLogout();
     }
+
     render() {
         return <div>Logging out...</div>;
     }
 }
 
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.props.clearStatus();
+    }
     state = {
         username: '',
         password: ''
@@ -132,6 +146,11 @@ class LoginForm extends Component {
 }
 
 class RegisterForm extends Component {
+    constructor(props) {
+        super(props);
+        this.props.clearStatus();
+    }
+
     state = {
         username: '',
         password: ''

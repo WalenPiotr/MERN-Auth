@@ -49,7 +49,7 @@ function register(request, response, next) {
         request.body.password
     )
         .then(() => login(request, response, next))
-        .catch(error => response.status(500).send({ error: error.message }));
+        .catch(error => next(error));
 }
 
 router.post('/register', (request, response, next) => {

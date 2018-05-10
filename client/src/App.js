@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Main from './containers/Main';
 import Navbar from './containers/Navbar';
-import Errorbar from './containers/Errorbar';
+import StatusBar from './containers/StatusBar';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <Errorbar />
+                <StatusBar />
                 <Navbar />
                 <Main />
             </div>
