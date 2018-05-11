@@ -5,7 +5,6 @@ class LogoutView extends Component {
         super(props);
         this.props.handlers.clearStatus();
         this.props.handlers.logout();
-        this.props.history.push('/');
     }
 
     render() {

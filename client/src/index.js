@@ -7,16 +7,22 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import thunk from 'redux-thunk';
 
+import { saveState, loadState } from './localStorage';
+
+const persistedState = loadState();
 const store = createStore(
     rootReducer,
+    persistedState,
     compose(
-        applyMiddleware(thunk),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
+
+store.subscribe(() => {
+    saveState(store.getState());
+});
 
 ReactDOM.render(
     <Provider store={store}>

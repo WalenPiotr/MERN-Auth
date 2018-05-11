@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
-import { Route, Switch, withRouter } from 'react-router';
-
+import { Route, Switch, withRouter, Redirect } from 'react-router';
+import { connect } from 'react-redux';
 import Register from './Register';
 import Logout from './Logout';
 import Login from './Login';
 
 class Main extends Component {
     render() {
+        console.log(this.props.authenticated)
         return (
             <div>
                 <Switch>
@@ -28,6 +29,15 @@ class Main extends Component {
                         path="/register"
                         component={props => <Register {...props} />}
                     />
+                    <Route
+                        path="/private"
+                        component={
+                            this.props.authenticated
+                                ? props => <div> you see protected content</div>
+                                : props => <Redirect to="/login" />
+                        }
+                    />
+
                     <Route component={() => <div> Not found </div>} />
                 </Switch>
             </div>
@@ -35,4 +45,10 @@ class Main extends Component {
     }
 }
 
-export default withRouter(Main);
+const mapPropsToState = function(state) {
+    return {
+        authenticated: state.auth.authenticated
+    };
+};
+
+export default withRouter(connect(mapPropsToState)(Main));
