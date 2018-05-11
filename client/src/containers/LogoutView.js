@@ -43,10 +43,6 @@ let createHandlers = ({ history, dispatch }) => {
     };
 };
 
-function fetchLogout() {
-    return dispatch => {};
-}
-
 export default connect()(props => (
     <LogoutView handlers={createHandlers(props)} />
 ));

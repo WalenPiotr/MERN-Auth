@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './containers/Navbar';
-import StatusBar from './containers/Status';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import StatusBar from './containers/StatusBar';
 import Routes from './routes';
 class App extends Component {
     render() {
