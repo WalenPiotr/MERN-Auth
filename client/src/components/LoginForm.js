@@ -8,6 +8,7 @@ class LoginForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.handlers.clearStatus();
         this.props.handlers.login({
             ...this.state
         });
@@ -20,6 +21,7 @@ class LoginForm extends Component {
 
     handleChange = field => event => {
         const value = event.target.value;
+        this.props.handlers.clearStatus();
         this.setState(previousState => {
             const newState = { ...previousState };
             newState[field] = value;

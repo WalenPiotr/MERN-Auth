@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { clearStatus } from '../actions/status';
 
 class RegisterForm extends Component {
     state = {
@@ -8,6 +9,7 @@ class RegisterForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.handlers.clearStatus();
         this.props.handlers.register(this.state);
         this.setState({
             username: '',
@@ -17,6 +19,7 @@ class RegisterForm extends Component {
 
     handleChange = field => event => {
         const value = event.target.value;
+        this.props.handlers.clearStatus();
         this.setState(previousState => {
             const newState = { ...previousState };
             newState[field] = value;

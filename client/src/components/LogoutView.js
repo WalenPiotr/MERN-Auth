@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
 class LogoutView extends Component {
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         this.props.handlers.logout();
+        this.props.handlers.clearStatus();
     }
-
     render() {
         return <div>Logging out...</div>;
     }

@@ -33,8 +33,13 @@ let createHandlers = ({ history, dispatch }) => {
             });
     };
 
+    let clearStatus = function() {
+        dispatch(status.clearStatus());
+    };
+
     return {
-        logout
+        logout,
+        clearStatus
     };
 };
 
