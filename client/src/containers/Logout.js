@@ -1,11 +1,10 @@
 import LogoutView from '../components/LogoutView';
-
-import { addSuccess, addError, clearStatus } from '../actions/status';
-import { logout } from '../actions/auth';
+import * as status from '../actions/status';
+import * as auth from '../actions/auth';
 import { connect } from 'react-redux';
 
-function fetchLogout() {
-    return dispatch => {
+let createHandlers = ({ history, dispatch }) => {
+    let logout = function(data) {
         const request = {
             type: 'cors',
             method: 'GET',
@@ -32,17 +31,21 @@ function fetchLogout() {
                 dispatch(addError(error));
             });
     };
-}
 
-function mapStateToProps(state) {
-    return {};
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        logout: user => dispatch(fetchLogout(user)),
-        clearStatus: () => dispatch(clearStatus())
+    let clearStatus = function() {
+        dispatch(status.clearStatus());
     };
+
+    return {
+        logout,
+        clearStatus
+    };
+};
+
+function fetchLogout() {
+    return dispatch => {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogoutView);
+const Login = props => <LogoutView handlers={createHandlers(props)} />;
+
+export default connect()(Login);

@@ -1,8 +1,5 @@
 import React from 'react';
-
 import RegisterForm from '../components/RegisterForm';
-
-import { addSuccess, addError, clearStatus } from '../actions/status';
 import * as status from '../actions/status';
 import * as auth from '../actions/auth';
 import { connect } from 'react-redux';

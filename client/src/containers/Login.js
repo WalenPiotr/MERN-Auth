@@ -1,9 +1,7 @@
 import LoginForm from '../components/LoginForm';
-
 import * as status from '../actions/status';
 import * as auth from '../actions/auth';
 import { connect } from 'react-redux';
-
 import React from 'react';
 
 let createHandlers = ({ history, dispatch }) => {
