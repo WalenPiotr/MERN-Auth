@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 
 const StatusBar = ({ status }) => {
@@ -13,7 +11,6 @@ const StatusBar = ({ status }) => {
     return component;
 };
 
-StatusBar.propTypes = {};
 
 function mapStateToProps(reduxState) {
     return {

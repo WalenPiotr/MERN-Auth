@@ -1,0 +1,67 @@
+import LoginForm from '../components/LoginForm';
+
+import * as status from '../actions/status';
+import * as auth from '../actions/auth';
+import { connect } from 'react-redux';
+
+import React from 'react';
+
+let createHandlers = ({ history, dispatch }) => {
+    let login = function(data) {
+        const request = {
+            type: 'cors',
+            body: JSON.stringify({
+                ...data
+            }),
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        };
+        dispatch(
+            status.addSuccess({
+                message: 'Logging into your account...'
+            })
+        );
+        fetch('/api/auth/login/', request)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error.message);
+                }
+                if (data.user) {
+                    dispatch(auth.login(data.user));
+                    dispatch(
+                        status.addSuccess({
+                            message: 'You have successfully logged in.'
+                        })
+                    );
+                    history.push('/');
+                    console.log('Finished logging.');
+                }
+            })
+            .catch(error => status.addError(error));
+    };
+
+    let clearStatus = function() {
+        dispatch(status.clearStatus());
+    };
+    return {
+        login,
+        clearStatus
+    };
+};
+
+class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlers = createHandlers(props);
+    }
+
+    render() {
+        return <LoginForm handlers={this.handlers} />;
+    }
+}
+
+export default connect()(Login);
