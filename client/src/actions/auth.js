@@ -6,7 +6,11 @@ import {
     ADD_SUCCESS
 } from '../actionTypes';
 
-import { addErrorAction, addSuccessAction, addSuccess } from './status';
+import {
+    addErrorAction,
+    addSuccessAction,
+    addSuccess
+} from './status';
 
 function loginAction(user) {
     return {
@@ -39,6 +43,11 @@ export function logout() {
                 'Content-Type': 'application/json'
             }
         };
+        dispatch(
+            addSuccess({
+                message: 'Logging out from your account...'
+            })
+        );
         return fetch('/api/auth/logout/', request)
             .then(response => response.json())
             .then(data => {
@@ -57,13 +66,19 @@ export function login(data) {
     return dispatch => {
         const request = {
             type: 'cors',
-            body: JSON.stringify({ ...data }),
+            body: JSON.stringify({ ...data
+            }),
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             }
         };
+        dispatch(
+            addSuccess({
+                message: 'Logging into your account...'
+            })
+        );
         fetch('/api/auth/login/', request)
             .then(response => response.json())
             .then(data => {
@@ -94,6 +109,11 @@ export function register(data) {
                 'Content-Type': 'application/json'
             }
         };
+        dispatch(
+            addSuccess({
+                message: 'Registering your account...'
+            })
+        );
         fetch('/api/auth/register/', request)
             .then(response => response.json())
             .then(data => {

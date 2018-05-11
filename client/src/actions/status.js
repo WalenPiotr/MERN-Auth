@@ -11,9 +11,10 @@ export function addErrorAction(error) {
     };
 }
 
-export function addSuccessAction() {
+export function addSuccessAction(success) {
     return {
-        type: ADD_SUCCESS
+        type: ADD_SUCCESS,
+        success
     };
 }
 
@@ -28,7 +29,7 @@ export function addError(error) {
 }
 
 export function addSuccess(success) {
-    return dispatch => dispatch(addErrorAction(success));
+    return dispatch => dispatch(addSuccessAction(success));
 }
 
 export function clearStatus() {
