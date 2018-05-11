@@ -39,10 +39,6 @@ let createHandlers = ({ history, dispatch }) => {
             })
             .catch(error => dispatch(status.addError(error)));
     };
-
-    let clearStatus = function() {
-        dispatch(status.clearStatus());
-    };
     return {
         register
     };
