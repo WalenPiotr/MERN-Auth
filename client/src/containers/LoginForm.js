@@ -51,6 +51,6 @@ let createHandlers = ({ history, dispatch }) => {
     };
 };
 
-const Login = props => <LoginForm handlers={createHandlers(props)} />;
-
-export default connect()(Login);
+export default connect()(props => (
+    <LoginForm handlers={createHandlers(props)} />
+));

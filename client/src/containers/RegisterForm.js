@@ -49,6 +49,6 @@ let createHandlers = ({ history, dispatch }) => {
     };
 };
 
-const Register = props => <RegisterForm handlers={createHandlers(props)} />;
-
-export default connect()(Register);
+export default connect()(props => (
+    <RegisterForm handlers={createHandlers(props)} />
+));

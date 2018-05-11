@@ -47,6 +47,6 @@ function fetchLogout() {
     return dispatch => {};
 }
 
-const Login = props => <LogoutView handlers={createHandlers(props)} />;
-
-export default connect()(Login);
+export default connect()(props => (
+    <LogoutView handlers={createHandlers(props)} />
+));
