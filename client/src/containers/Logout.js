@@ -17,7 +17,7 @@ let createHandlers = ({ history, dispatch }) => {
         status.addSuccess({
             message: 'Logging out from your account...'
         });
-        return fetch('/api/auth/logout/', request)
+        fetch('/api/auth/logout/', request)
             .then(response => response.json())
             .then(data => {
                 dispatch(auth.logout(data.user));
@@ -26,9 +26,9 @@ let createHandlers = ({ history, dispatch }) => {
                         message: 'You have successfully logged out.'
                     })
                 );
+                history.push('/');
             })
             .catch(error => {
-                console.log(error);
                 dispatch(status.addError(error));
             });
     };
