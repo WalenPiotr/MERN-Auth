@@ -44,11 +44,11 @@ let createHandlers = ({ history, dispatch }) => {
         dispatch(status.clearStatus());
     };
     return {
-        register,
-        clearStatus
+        register
     };
 };
 
-export default connect()(props => (
-    <RegisterForm handlers={createHandlers(props)} />
-));
+export default connect()(props => {
+    const handlers = createHandlers(props);
+    return <RegisterForm handlers={handlers} />;
+});

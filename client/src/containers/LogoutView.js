@@ -38,8 +38,7 @@ let createHandlers = ({ history, dispatch }) => {
     };
 
     return {
-        logout,
-        clearStatus
+        logout
     };
 };
 

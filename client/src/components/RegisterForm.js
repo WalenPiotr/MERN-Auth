@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class RegisterForm extends Component {
-    componentDidMount() {
-        this.props.handlers.clearStatus();
-    }
-
     state = {
         username: '',
         password: ''

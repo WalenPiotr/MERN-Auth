@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class LogoutView extends Component {
     constructor(props) {
         super(props);
-        this.props.handlers.clearStatus();
         this.props.handlers.logout();
     }
 

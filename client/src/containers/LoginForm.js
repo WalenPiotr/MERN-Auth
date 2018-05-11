@@ -36,7 +36,6 @@ let createHandlers = ({ history, dispatch }) => {
                         })
                     );
                     history.push('/');
-                    console.log('Finished logging.');
                 }
             })
             .catch(error => dispatch(status.addError(error)));
@@ -46,8 +45,7 @@ let createHandlers = ({ history, dispatch }) => {
         dispatch(status.clearStatus());
     };
     return {
-        login,
-        clearStatus
+        login
     };
 };
 

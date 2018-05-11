@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class LoginForm extends Component {
-    componentDidMount() {
-        this.props.handlers.clearStatus();
-    }
     state = {
         username: '',
         password: ''
