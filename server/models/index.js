@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/calories-backend', {
+mongoose.connect(process.env.DBURL, {
     keepAlive: true
 });
 module.exports.User = require('./user.js');
