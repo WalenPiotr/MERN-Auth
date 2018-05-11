@@ -25,20 +25,26 @@ const StyledLink = styled(Link)`
     color: white;
 `;
 
-const Navbar = ({ authenticated }) => {
+const Navbar = ({ authenticated, clearStatus }) => {
     const component = authenticated ? (
         <Bar>
             <LinkBox>
-                <StyledLink to="/logout"> Logout </StyledLink>
+                <StyledLink to="/logout" onClick={() => clearStatus()}>
+                    Logout
+                </StyledLink>
             </LinkBox>
         </Bar>
     ) : (
         <Bar>
             <LinkBox>
-                <StyledLink to="/login">Login</StyledLink>
+                <StyledLink to="/login" onClick={() => clearStatus()}>
+                    Login
+                </StyledLink>
             </LinkBox>
             <LinkBox>
-                <StyledLink to="/register">Register</StyledLink>
+                <StyledLink to="/register" onClick={() => clearStatus()}>
+                    Register
+                </StyledLink>
             </LinkBox>
         </Bar>
     );
