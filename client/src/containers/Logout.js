@@ -1,3 +1,4 @@
+import React from 'react';
 import LogoutView from '../components/LogoutView';
 import * as status from '../actions/status';
 import * as auth from '../actions/auth';
@@ -13,22 +14,22 @@ let createHandlers = ({ history, dispatch }) => {
                 'Content-Type': 'application/json'
             }
         };
-        addSuccess({
+        status.addSuccess({
             message: 'Logging out from your account...'
         });
         return fetch('/api/auth/logout/', request)
             .then(response => response.json())
             .then(data => {
-                dispatch(logout(data.user));
+                dispatch(auth.logout(data.user));
                 dispatch(
-                    addSuccess({
+                    status.addSuccess({
                         message: 'You have successfully logged out.'
                     })
                 );
             })
             .catch(error => {
                 console.log(error);
-                dispatch(addError(error));
+                dispatch(status.addError(error));
             });
     };
 
