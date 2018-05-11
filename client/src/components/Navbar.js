@@ -9,14 +9,13 @@ const Bar = styled.div`
     height: 50px;
     background-color: rgba(10, 40, 220, 0.8);
     border-radius: 0 0 8px 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px;
 `;
 
 const LinkBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    margin-right: 15px;
     height: 100%;
 `;
 
