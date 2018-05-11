@@ -41,7 +41,7 @@ let createHandlers = ({ history, dispatch }) => {
                     console.log('Finished logging.');
                 }
             })
-            .catch(error => status.addError(error));
+            .catch(error => dispatch(status.addError(error)));
     };
 
     let clearStatus = function() {
@@ -53,15 +53,6 @@ let createHandlers = ({ history, dispatch }) => {
     };
 };
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handlers = createHandlers(props);
-    }
-
-    render() {
-        return <LoginForm handlers={this.handlers} />;
-    }
-}
+const Login = props => <LoginForm handlers={createHandlers(props)} />;
 
 export default connect()(Login);

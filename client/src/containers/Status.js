@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const StatusBar = ({ status }) => {
+const Status = ({ status }) => {
     let component = <div> </div>;
     if (status.error) {
         component = <div> {status.error.message} </div>;
@@ -11,10 +11,9 @@ const StatusBar = ({ status }) => {
     return component;
 };
 
-
 function mapStateToProps(reduxState) {
     return {
         status: reduxState.status
     };
 }
-export default connect(mapStateToProps)(StatusBar);
+export default connect(mapStateToProps)(Status);

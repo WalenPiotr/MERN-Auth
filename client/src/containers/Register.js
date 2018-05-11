@@ -1,11 +1,14 @@
+import React from 'react';
+
 import RegisterForm from '../components/RegisterForm';
 
 import { addSuccess, addError, clearStatus } from '../actions/status';
-import { login } from '../actions/auth';
+import * as status from '../actions/status';
+import * as auth from '../actions/auth';
 import { connect } from 'react-redux';
 
-function fetchRegister(data) {
-    return dispatch => {
+let createHandlers = ({ history, dispatch }) => {
+    let register = function(data) {
         const request = {
             type: 'cors',
             body: JSON.stringify(data),
@@ -16,40 +19,39 @@ function fetchRegister(data) {
             }
         };
         dispatch(
-            addSuccess({
+            status.addSuccess({
                 message: 'Registering your account...'
             })
         );
         fetch('/api/auth/register/', request)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     throw new Error(data.error.message);
                 }
                 if (data.user) {
-                    dispatch(login(data.user));
+                    dispatch(auth.login(data.user));
                     dispatch(
-                        addSuccess({
+                        status.addSuccess({
                             message:
                                 'You have successfully registered and logged in.'
                         })
                     );
+                    history.push('/');
                 }
             })
-            .catch(error => dispatch(addError(error)));
+            .catch(error => dispatch(status.addError(error)));
     };
-}
 
-function mapStateToProps(state) {
-    return {};
-}
-
-function mapDispatchToProps(dispatch) {
+    let clearStatus = function() {
+        dispatch(status.clearStatus());
+    };
     return {
-        register: user => dispatch(fetchRegister(user)),
-        clearStatus: () => dispatch(clearStatus())
+        register,
+        clearStatus
     };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+const Register = props => <RegisterForm handlers={createHandlers(props)} />;
+
+export default connect()(Register);

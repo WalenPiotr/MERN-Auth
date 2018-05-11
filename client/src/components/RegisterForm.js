@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
 class RegisterForm extends Component {
-    constructor(props) {
-        super(props);
-        this.props.clearStatus();
+    componentDidMount() {
+        this.props.handlers.clearStatus();
     }
 
     state = {
@@ -13,8 +12,7 @@ class RegisterForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.register(this.state);
-        this.props.history.push('/');
+        this.props.handlers.register(this.state);
         this.setState({
             username: '',
             password: ''

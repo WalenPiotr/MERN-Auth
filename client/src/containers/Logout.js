@@ -27,7 +27,10 @@ function fetchLogout() {
                     })
                 );
             })
-            .catch(error => addError(error));
+            .catch(error => {
+                console.log(error);
+                dispatch(addError(error));
+            });
     };
 }
 

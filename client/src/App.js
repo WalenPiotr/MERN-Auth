@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Main from './containers/Main';
-import Navbar from './components/Navbar';
-import StatusBar from './containers/StatusBar';
+import Navbar from './containers/Navbar';
+import StatusBar from './containers/Status';
 
+import { connect } from 'react-redux';
 class App extends Component {
     render() {
         return (
