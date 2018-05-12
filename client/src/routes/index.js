@@ -3,9 +3,9 @@ import { Route, Switch, withRouter } from 'react-router';
 import RegisterForm from '../containers/RegisterForm';
 import LogoutView from '../containers/LogoutView';
 import LoginForm from '../containers/LoginForm';
-import Home from './components/Home';
-import NotFound from './components/NotFound';
-import Protected from './containers/Protected';
+import Home from '../components/Home';
+import NotFound from '../components/NotFound';
+import Protected from '../containers/Protected';
 import { clearStatus } from '../actions/status';
 import { connect } from 'react-redux';
 const Routes = ({ clearStatus }) => (
