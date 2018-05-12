@@ -36,9 +36,18 @@ const StyledLink = styled(Link)`
     color: white;
 `;
 
-const Navbar = ({ authenticated, clearStatus }) => {
+const User = styled.p`
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+`;
+
+const Navbar = ({ authenticated, user, clearStatus }) => {
     const authComponents = authenticated ? (
         <Authentication>
+            <LinkBox>
+                <User>Logged as {user.username}</User>
+            </LinkBox>
             <LinkBox>
                 <StyledLink to="/logout" onClick={() => clearStatus()}>
                     Logout

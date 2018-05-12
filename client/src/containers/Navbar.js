@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import { clearStatus } from '../actions/status';
 
 function mapStateToProps(state) {
-    return { authenticated: state.auth.authenticated };
+    return { authenticated: state.auth.authenticated, user: state.auth.user };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -15,7 +15,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    ({ authenticated, clearStatus }) => (
-        <Navbar authenticated={authenticated} clearStatus={clearStatus} />
+    ({ authenticated, user, clearStatus }) => (
+        <Navbar
+            authenticated={authenticated}
+            user={user}
+            clearStatus={clearStatus}
+        />
     )
 );
