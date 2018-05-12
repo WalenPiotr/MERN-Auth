@@ -1,13 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+const Box = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 
 const Protected = ({ authenticated }) => {
     const component = authenticated ? (
-        <div> Protected content</div>
+        <h1> Protected content</h1>
     ) : (
-        <div> Please log in </div>
+        <h1> Please log in </h1>
     );
 
-    return component;
+    return <Box>{component}</Box>;
 };
 
 export default Protected;
