@@ -8,9 +8,9 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_ERROR:
-            return { error: action.error };
+            return { ...state, error: action.error };
         case ADD_SUCCESS:
-            return { success: action.success };
+            return { ...state, success: action.success };
         case CLEAR_STATUS:
             return { error: {}, success: {} };
         default:

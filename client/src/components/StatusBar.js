@@ -22,9 +22,9 @@ const SuccessBar = styled(Bar)`
 const StatusBar = ({ status }) => {
     let component = <Bar> </Bar>;
     console.log(status);
-    if (status.error && Object.keys(status.error).length !== 0) {
+    if (status.error && status.error.message) {
         component = <ErrorBar> {status.error.message} </ErrorBar>;
-    } else if (status.success && Object.keys(status.success).length !== 0) {
+    } else if (status.success && status.success.message) {
         component = <SuccessBar> {status.success.message} </SuccessBar>;
     }
     return component;
